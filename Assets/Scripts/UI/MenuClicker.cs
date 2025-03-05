@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,12 +15,29 @@ public class MenuClicker : MonoBehaviour
     private bool isTransitioning = false;
     private bool isOpen = false;
 
+    [Header("Opened Panel")]
+    [SerializeField] private List<Image> Powers;
+    [SerializeField] private Sprite UnlockedSprite;
+    [SerializeField] private Sprite LockedSprite;
+    [SerializeField] private Image BG;
+    [SerializeField] private ElementDataSO DataSO;
+
     #region Unity
     private void OnEnable()
     {
         OrginalPosition = ButtonTransform.position;
         OriginalScale = this.transform.localScale;
         MenuPanel.color = new Color(1, 1, 1, 0);
+
+        MenuPanel.transform.localScale = Vector3.zero;
+
+        ElementHolder.ElementTypeChanged += OnClickedElement;
+    }
+
+    private void OnDisable()
+    {
+        ElementHolder.ElementTypeChanged -= OnClickedElement;
+
     }
     #endregion
 
@@ -71,7 +89,6 @@ public class MenuClicker : MonoBehaviour
 
                 PanelScale = Vector3.Lerp(Vector3.one, Vector3.zero, t);
 
-
                 endColor = Mathf.Lerp(1, 0, t);
             }
 
@@ -80,12 +97,39 @@ public class MenuClicker : MonoBehaviour
 
             MenuPanel.transform.localScale = PanelScale;
 
+            BG.color = new Color(1, 1, 1, endColor * 0.25f);
+
             MenuPanel.color = new Color(1, 1, 1, endColor);
 
             yield return null;
         }
 
         isTransitioning = false;
+    }
+
+    #endregion
+
+    #region Callbacks
+    private void OnClickedElement(Element Type)
+    {
+        ElementData data = DataSO.GetElementData(Type);
+
+        if (data != null)
+        {
+            BG.sprite = data.sprite;
+
+            for (int i = 0; i < Powers.Count; i++)
+            {
+                if (i < data.Value)
+                {
+                    Powers[i].sprite = UnlockedSprite;
+                }
+                else
+                {
+                    Powers[i].sprite = LockedSprite;
+                }
+            }
+        }
     }
     #endregion
 }

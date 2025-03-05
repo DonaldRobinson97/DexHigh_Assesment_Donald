@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571fa83100fca7a4597c4ee770a49144, type: 3}
+  m_Name: ElementDataSO
+  m_EditorClassIdentifier: 
+  Elements:
+  - Type: 0
+    Value: 2
+    sprite: {fileID: 21300000, guid: 50f2e77164382c3478bb34aab511ffa5, type: 3}
+    accentColor: {r: 0.26666668, g: 0.83921576, b: 0.9686275, a: 1}
+  - Type: 1
+    Value: 4
+    sprite: {fileID: 21300000, guid: 316ded21fcb3a234aa22543943907846, type: 3}
+    accentColor: {r: 0.9058824, g: 0.16078432, b: 0.03529412, a: 1}
+  - Type: 2
+    Value: 1
+    sprite: {fileID: 21300000, guid: 3b6de4cb370433247b49c889dc310e5d, type: 3}
+    accentColor: {r: 0.59607846, g: 0.9490197, b: 0.227451, a: 1}
+  - Type: 3
+    Value: 5
+    sprite: {fileID: 21300000, guid: d9e2ccbaac79af649a070d0ceaffe82c, type: 3}
+    accentColor: {r: 0.8862746, g: 0.2901961, b: 0.909804, a: 1}
+  - Type: 4
+    Value: 3
+    sprite: {fileID: 21300000, guid: a8416ce9165df354c88ed3f29f1f5017, type: 3}
+    accentColor: {r: 1, g: 0.854902, b: 0.20392159, a: 1}

@@ -28,7 +28,10 @@ public class RadialMenuHandler : MonoBehaviour
     {
         iconCount = elementButtons.Count;
         MiddleIndex = iconCount / 2;
+
         ReArrangeElements(false);
+        
+        elementButtons[MiddleIndex].OnSelect(null);
     }
 
     #endregion
@@ -138,7 +141,6 @@ public class RadialMenuHandler : MonoBehaviour
     #region Callbacks
     private void OnClickedElement(int Index)
     {
-        Debug.Log("Clicked on element " + Index);
         ReOrderElements(Index);
     }
     #endregion

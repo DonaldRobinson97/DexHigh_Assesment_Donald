@@ -9,10 +9,12 @@ public class ElementHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private Image Icon;
     [SerializeField] private Sprite DefaultSprite;
     [SerializeField] private Sprite HighlightSprite;
+    [SerializeField] private Element Type;
     private bool isOpen = false;
     private bool isMain = false;
     public int Index = -1;
     public static event Action<int> OnElementClicked;
+    public static event Action<Element> ElementTypeChanged;
 
     #region Unity
     void Start()
@@ -46,6 +48,7 @@ public class ElementHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnSelect(BaseEventData eventData)
     {
         OnElementClicked?.Invoke(Index);
+        ElementTypeChanged?.Invoke(Type);
     }
 
     public void OnDeselect(BaseEventData eventData)
