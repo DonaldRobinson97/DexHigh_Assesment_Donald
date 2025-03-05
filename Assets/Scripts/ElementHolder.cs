@@ -5,24 +5,35 @@ public class ElementHolder : MonoBehaviour
 {
     [SerializeField] private Transform Icon;
 
-    public void RotateIcon(float Angle, float Time)
+    public void RotateIcon(float Angle, float Time, float scaleFactor)
     {
-        Icon.transform.localRotation = Quaternion.Euler(0, 0, Angle);
-
-        // StartCoroutine(RotateIconRoutine(Angle, Time));
+        StartCoroutine(RotateIconRoutine(Angle, Time, scaleFactor));
     }
 
-    private IEnumerator RotateIconRoutine(float Angle, float duration)
+    private IEnumerator RotateIconRoutine(float targetAngle, float duration, float scaleFactor)
     {
         float elapsedTime = 0;
+        float startAngle = Icon.transform.localRotation.eulerAngles.z;
+
+        Vector3 startScale = Icon.transform.localScale;
+        Vector3 endScale = new Vector3(scaleFactor, scaleFactor, 1f);
 
         while (elapsedTime < duration)
         {
             float t = elapsedTime / duration;
-            float interpolatedAngle = Mathf.Lerp(0, Angle, t);
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            float interpolatedAngle = Mathf.Lerp(startAngle, targetAngle, t);
+
             Icon.transform.localRotation = Quaternion.Euler(0, 0, interpolatedAngle);
+            Icon.transform.localScale = Vector3.Lerp(startScale, endScale, t);
+
             elapsedTime += Time.deltaTime;
+
             yield return null;
         }
+
+        Icon.transform.localRotation = Quaternion.Euler(0, 0, targetAngle);
+        Icon.transform.localScale = endScale;
     }
 }

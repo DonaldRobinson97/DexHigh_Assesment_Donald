@@ -651,6 +651,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 7554944053885823297, guid: 5239e75a1605654439dfc1e937df4679, type: 3}
+      propertyPath: scaleFactor
+      value: 0.85
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
