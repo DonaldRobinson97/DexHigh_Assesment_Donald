@@ -23,7 +23,7 @@ public class MenuClicker : MonoBehaviour
     }
     #endregion
 
-    public void OnButtonCliked()
+    public void OpenPanelButton()
     {
         if (isTransitioning)
             return;
