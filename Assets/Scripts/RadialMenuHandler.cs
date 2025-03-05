@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,20 +25,39 @@ public class RadialMenuHandler : MonoBehaviour
         ishalfCircle = !ishalfCircle;
 
         Debug.Log("The circle is half?" + ishalfCircle);
+
+        ReArrangeElements();
     }
     #endregion
 
     #region Private
     private void ReArrangeElements()
     {
-        float radAngle = 360 / iconCount;
+        float radAngle = (ishalfCircle ? 180 : 360) / (ishalfCircle ? iconCount - 1 : iconCount);
 
         for (int i = 0; i < iconCount; i++)
         {
-            float angle = radAngle * i;
-            elementButtons[i].transform.rotation = Quaternion.Euler(0, 0, angle);
-            elementButtons[i].RotateIcon(-angle, RotateDuration);
+            float targetAngle = radAngle * i;
+            StartCoroutine(RotateElementSmoothly(elementButtons[i].transform, targetAngle, RotateDuration));
+            elementButtons[i].RotateIcon(-targetAngle, RotateDuration);
         }
     }
+
+    private IEnumerator RotateElementSmoothly(Transform target, float targetAngle, float duration)
+    {
+        Quaternion startRotation = target.rotation;
+        Quaternion endRotation = Quaternion.Euler(0, 0, targetAngle);
+        float elapsedTime = 0;
+
+        while (elapsedTime < duration)
+        {
+            target.rotation = Quaternion.Lerp(startRotation, endRotation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        target.rotation = endRotation; // Ensure it finishes exactly at the target rotation
+    }
+
     #endregion
 }
