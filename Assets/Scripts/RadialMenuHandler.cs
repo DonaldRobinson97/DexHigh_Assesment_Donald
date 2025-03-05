@@ -35,12 +35,32 @@ public class RadialMenuHandler : MonoBehaviour
 
         for (int i = 0; i < iconCount; i++)
         {
+            elementButtons[i].Index = i;
+
             float targetAngle = radAngle * i;
 
             StartCoroutine(RotateElementSmoothly(elementButtons[i].transform, targetAngle, IsAnimated ? RotateDuration : 0f));
 
-            elementButtons[i].RotateIcon(-targetAngle, IsAnimated ? RotateDuration : 0f, GetScaleFactor(i));
+            elementButtons[i].RotateIcon(-targetAngle, IsAnimated ? RotateDuration : 0f, GetScaleFactor(i), ishalfCircle);
+
+            CheckForMain(i);
         }
+    }
+
+    private void CheckForMain(int Index)
+    {
+        if (ishalfCircle)
+        {
+            if (Index == iconCount / 2)
+            {
+                elementButtons[Index].ToggleMain(true);
+            }
+            else
+            {
+                elementButtons[Index].ToggleMain(false);
+            }
+        }
+
     }
 
     private IEnumerator RotateElementSmoothly(Transform target, float targetAngle, float duration)

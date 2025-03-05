@@ -1,13 +1,51 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ElementHolder : MonoBehaviour
+public class ElementHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Transform Icon;
+    [SerializeField] private Image Icon;
+    [SerializeField] private Sprite DefaultSprite;
+    [SerializeField] private Sprite HighlightSprite;
+    private bool isOpen = false;
+    private bool isMain = false;
+    public int Index = -1;
 
-    public void RotateIcon(float Angle, float Time, float scaleFactor)
+
+    #region Unity
+    void Start()
     {
+        ToggleSprite(false);
+    }
+    #endregion
+
+    public void RotateIcon(float Angle, float Time, float scaleFactor, bool Opened)
+    {
+        isOpen = Opened;
         StartCoroutine(RotateIconRoutine(Angle, Time, scaleFactor));
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!isMain && isOpen)
+        {
+            ToggleSprite(true);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!isMain && isOpen)
+        {
+            ToggleSprite(false);
+        }
+    }
+
+    public void ToggleMain(bool Main)
+    {
+        isMain = Main;
+        ToggleSprite(isMain);
     }
 
     private IEnumerator RotateIconRoutine(float targetAngle, float duration, float scaleFactor)
@@ -35,5 +73,17 @@ public class ElementHolder : MonoBehaviour
 
         Icon.transform.localRotation = Quaternion.Euler(0, 0, targetAngle);
         Icon.transform.localScale = endScale;
+    }
+
+    private void ToggleSprite(bool isHighlight)
+    {
+        if (isHighlight)
+        {
+            Icon.sprite = HighlightSprite;
+        }
+        else
+        {
+            Icon.sprite = DefaultSprite;
+        }
     }
 }
