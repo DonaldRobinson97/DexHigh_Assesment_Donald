@@ -94,22 +94,45 @@ public class RadialMenuHandler : MonoBehaviour
         if (ClickedIndex == MiddleIndex) return;
 
         int shiftAmount = ClickedIndex - MiddleIndex;
+        int stepCount = Mathf.Abs(shiftAmount);
+        bool isClockwise = shiftAmount < 0;
 
-        List<ElementHolder> newList = new List<ElementHolder>(elementButtons);
+        StartCoroutine(PerformStepwiseRotation(isClockwise, stepCount));
+    }
 
-        for (int i = 0; i < iconCount; i++)
+    private IEnumerator PerformStepwiseRotation(bool isClockwise, int steps)
+    {
+        for (int step = 0; step < steps; step++)
         {
-            int newIndex = (i - shiftAmount + iconCount) % iconCount;
-            elementButtons[newIndex] = newList[i];
+            PerformSingleShift(isClockwise);
+
+            yield return new WaitForSeconds(RotateDuration);
+        }
+    }
+
+    private void PerformSingleShift(bool isClockwise)
+    {
+        if (isClockwise)
+        {
+            ElementHolder lastElement = elementButtons[elementButtons.Count - 1];
+            elementButtons.RemoveAt(elementButtons.Count - 1);
+            elementButtons.Insert(0, lastElement);
+        }
+        else
+        {
+            ElementHolder firstElement = elementButtons[0];
+            elementButtons.RemoveAt(0);
+            elementButtons.Add(firstElement);
         }
 
-        for (int i = 0; i < iconCount; i++)
+        for (int i = 0; i < elementButtons.Count; i++)
         {
             elementButtons[i].Index = i;
         }
 
-        ReArrangeElements();
+        ReArrangeElements(true);
     }
+
     #endregion
 
     #region Callbacks
