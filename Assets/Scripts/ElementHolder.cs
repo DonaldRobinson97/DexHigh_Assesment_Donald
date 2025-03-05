@@ -2,8 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
-public class ElementHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ElementHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
     [SerializeField] private Image Icon;
     [SerializeField] private Sprite DefaultSprite;
@@ -11,7 +12,7 @@ public class ElementHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private bool isOpen = false;
     private bool isMain = false;
     public int Index = -1;
-
+    public static event Action<int> OnElementClicked;
 
     #region Unity
     void Start()
@@ -40,6 +41,16 @@ public class ElementHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             ToggleSprite(false);
         }
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        OnElementClicked?.Invoke(Index);
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+
     }
 
     public void ToggleMain(bool Main)

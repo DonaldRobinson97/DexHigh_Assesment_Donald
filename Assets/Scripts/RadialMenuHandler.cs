@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 
 public class RadialMenuHandler : MonoBehaviour
@@ -10,11 +11,23 @@ public class RadialMenuHandler : MonoBehaviour
     [SerializeField] private float scaleFactor = 0.25f;
     private bool ishalfCircle = false;
     private int iconCount = 0;
+    private int MiddleIndex = 0;
 
     #region Unity
+    private void OnEnable()
+    {
+        ElementHolder.OnElementClicked += OnClickedElement;
+    }
+
+    private void OnDisable()
+    {
+        ElementHolder.OnElementClicked -= OnClickedElement;
+    }
+
     private void Start()
     {
         iconCount = elementButtons.Count;
+        MiddleIndex = iconCount / 2;
         ReArrangeElements(false);
     }
 
@@ -43,24 +56,8 @@ public class RadialMenuHandler : MonoBehaviour
 
             elementButtons[i].RotateIcon(-targetAngle, IsAnimated ? RotateDuration : 0f, GetScaleFactor(i), ishalfCircle);
 
-            CheckForMain(i);
+            elementButtons[i].ToggleMain(i == MiddleIndex && ishalfCircle);
         }
-    }
-
-    private void CheckForMain(int Index)
-    {
-        if (ishalfCircle)
-        {
-            if (Index == iconCount / 2)
-            {
-                elementButtons[Index].ToggleMain(true);
-            }
-            else
-            {
-                elementButtons[Index].ToggleMain(false);
-            }
-        }
-
     }
 
     private IEnumerator RotateElementSmoothly(Transform target, float targetAngle, float duration)
@@ -90,6 +87,36 @@ public class RadialMenuHandler : MonoBehaviour
         int distanceFromCenter = Mathf.Abs(index - center);
 
         return Mathf.Pow(scaleFactor, distanceFromCenter);
+    }
+
+    private void ReOrderElements(int ClickedIndex)
+    {
+        if (ClickedIndex == MiddleIndex) return;
+
+        int shiftAmount = ClickedIndex - MiddleIndex;
+
+        List<ElementHolder> newList = new List<ElementHolder>(elementButtons);
+
+        for (int i = 0; i < iconCount; i++)
+        {
+            int newIndex = (i - shiftAmount + iconCount) % iconCount;
+            elementButtons[newIndex] = newList[i];
+        }
+
+        for (int i = 0; i < iconCount; i++)
+        {
+            elementButtons[i].Index = i;
+        }
+
+        ReArrangeElements();
+    }
+    #endregion
+
+    #region Callbacks
+    private void OnClickedElement(int Index)
+    {
+        Debug.Log("Clicked on element " + Index);
+        ReOrderElements(Index);
     }
     #endregion
 }
