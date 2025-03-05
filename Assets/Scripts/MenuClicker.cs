@@ -44,6 +44,7 @@ public class MenuClicker : MonoBehaviour
 
         Vector2 endPos;
         Vector3 endScale;
+        Vector3 PanelScale;
         float endColor;
         float t;
 
@@ -59,6 +60,8 @@ public class MenuClicker : MonoBehaviour
                 endPos = Vector3.Lerp(OrginalPosition, EndPoint.position, t);
                 endScale = Vector3.Lerp(OriginalScale, EndScale, t);
 
+                PanelScale = Vector3.Lerp(Vector3.zero, Vector3.one, t);
+
                 endColor = Mathf.Lerp(0, 1, t);
             }
             else
@@ -66,11 +69,16 @@ public class MenuClicker : MonoBehaviour
                 endPos = Vector3.Lerp(EndPoint.position, OrginalPosition, t);
                 endScale = Vector3.Lerp(EndScale, OriginalScale, t);
 
+                PanelScale = Vector3.Lerp(Vector3.one, Vector3.zero, t);
+
+
                 endColor = Mathf.Lerp(1, 0, t);
             }
 
             ButtonTransform.position = endPos;
             this.transform.localScale = endScale;
+
+            MenuPanel.transform.localScale = PanelScale;
 
             MenuPanel.color = new Color(1, 1, 1, endColor);
 
