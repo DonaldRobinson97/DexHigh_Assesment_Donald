@@ -30,8 +30,10 @@ public class RadialMenuHandler : MonoBehaviour
         MiddleIndex = iconCount / 2;
 
         ReArrangeElements(false);
-        
+
         elementButtons[MiddleIndex].OnSelect(null);
+
+        Application.targetFrameRate = 60;
     }
 
     #endregion

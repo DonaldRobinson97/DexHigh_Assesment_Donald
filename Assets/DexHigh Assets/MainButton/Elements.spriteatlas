@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Elements
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 1
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 50
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: d9e2ccbaac79af649a070d0ceaffe82c, type: 3}
+    - {fileID: 21300000, guid: 536a774ff35dd954fa6c8e3947e8c58e, type: 3}
+    - {fileID: 21300000, guid: 127ab1e98aae0694b83c23fe1a14ec56, type: 3}
+    - {fileID: 21300000, guid: ac069e2db4ebf924aa91a02323d0b510, type: 3}
+    - {fileID: 21300000, guid: 2eecd99095d68d749ba72f7ec51e67fd, type: 3}
+    - {fileID: 21300000, guid: be6be65223a8e5f42805562817ea1e04, type: 3}
+    - {fileID: 21300000, guid: 316ded21fcb3a234aa22543943907846, type: 3}
+    - {fileID: 21300000, guid: a8416ce9165df354c88ed3f29f1f5017, type: 3}
+    - {fileID: 21300000, guid: 2f008a6174d15f841a54d391f7f4d23a, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 2eecd99095d68d749ba72f7ec51e67fd: 21300000
+    - 316ded21fcb3a234aa22543943907846: 21300000
+    - 2f008a6174d15f841a54d391f7f4d23a: 21300000
+    - be6be65223a8e5f42805562817ea1e04: 21300000
+    - 127ab1e98aae0694b83c23fe1a14ec56: 21300000
+    - a8416ce9165df354c88ed3f29f1f5017: 21300000
+    - d9e2ccbaac79af649a070d0ceaffe82c: 21300000
+    - ac069e2db4ebf924aa91a02323d0b510: 21300000
+    - 536a774ff35dd954fa6c8e3947e8c58e: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 2eecd99095d68d749ba72f7ec51e67fd, type: 3}
+  - {fileID: 21300000, guid: 316ded21fcb3a234aa22543943907846, type: 3}
+  - {fileID: 21300000, guid: 2f008a6174d15f841a54d391f7f4d23a, type: 3}
+  - {fileID: 21300000, guid: be6be65223a8e5f42805562817ea1e04, type: 3}
+  - {fileID: 21300000, guid: 127ab1e98aae0694b83c23fe1a14ec56, type: 3}
+  - {fileID: 21300000, guid: a8416ce9165df354c88ed3f29f1f5017, type: 3}
+  - {fileID: 21300000, guid: d9e2ccbaac79af649a070d0ceaffe82c, type: 3}
+  - {fileID: 21300000, guid: ac069e2db4ebf924aa91a02323d0b510, type: 3}
+  - {fileID: 21300000, guid: 536a774ff35dd954fa6c8e3947e8c58e, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - desaturated_Waterelement
+  - Fire_skill_tree
+  - Main_button
+  - desaturated_Wind_element
+  - desaturated_Fire_element
+  - light
+  - dark_-_skill_tree
+  - desaturated_Light_element
+  - desaturated_Dark_element
+  m_RenderDataMap: {}
+  m_Tag: Elements
+  m_IsVariant: 0
