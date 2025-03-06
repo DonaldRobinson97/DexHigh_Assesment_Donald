@@ -73,21 +73,26 @@ public class ElementHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         while (elapsedTime < duration)
         {
             float t = elapsedTime / duration;
-            t = Mathf.SmoothStep(0f, 1f, t);
+            t = EaseInOutQuad(t);
 
-            float interpolatedAngle = Mathf.Lerp(startAngle, targetAngle, t);
+            float interpolatedAngle = Mathf.LerpAngle(startAngle, targetAngle, t);
 
             Icon.transform.localRotation = Quaternion.Euler(0, 0, interpolatedAngle);
             Icon.transform.localScale = Vector3.Lerp(startScale, endScale, t);
 
             elapsedTime += Time.deltaTime;
-
             yield return null;
         }
 
         Icon.transform.localRotation = Quaternion.Euler(0, 0, targetAngle);
         Icon.transform.localScale = endScale;
     }
+
+    private float EaseInOutQuad(float t)
+    {
+        return t < 0.5f ? 2f * t * t : 1f - Mathf.Pow(-2f * t + 2f, 2f) / 2f;
+    }
+
 
     private void ToggleSprite(bool isHighlight)
     {

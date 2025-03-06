@@ -51,15 +51,18 @@ public class RadialMenuHandler : MonoBehaviour
     {
         float radAngle = (ishalfCircle ? 180 : 360) / (ishalfCircle ? iconCount - 1 : iconCount);
 
+        float rotateDuration = IsAnimated ? RotateDuration : 0;
+
+
         for (int i = 0; i < iconCount; i++)
         {
             elementButtons[i].Index = i;
 
             float targetAngle = radAngle * i;
 
-            StartCoroutine(RotateElementSmoothly(elementButtons[i].transform, targetAngle, IsAnimated ? RotateDuration : 0f));
+            StartCoroutine(RotateElementSmoothly(elementButtons[i].transform, targetAngle, rotateDuration));
 
-            elementButtons[i].RotateIcon(-targetAngle, IsAnimated ? RotateDuration : 0f, GetScaleFactor(i), ishalfCircle);
+            elementButtons[i].RotateIcon(-targetAngle, rotateDuration, GetScaleFactor(i), ishalfCircle);
 
             elementButtons[i].ToggleMain(i == MiddleIndex && ishalfCircle);
         }
