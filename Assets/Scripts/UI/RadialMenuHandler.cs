@@ -12,6 +12,7 @@ public class RadialMenuHandler : MonoBehaviour
     private bool ishalfCircle = false;
     private int iconCount = 0;
     private int MiddleIndex = 0;
+    private bool isTransitioning = false;
 
     #region Unity
     private void OnEnable()
@@ -101,6 +102,8 @@ public class RadialMenuHandler : MonoBehaviour
     {
         if (ClickedIndex == MiddleIndex) return;
 
+        isTransitioning = true;
+
         int shiftAmount = ClickedIndex - MiddleIndex;
         int stepCount = Mathf.Abs(shiftAmount);
         bool isClockwise = shiftAmount < 0;
@@ -114,8 +117,10 @@ public class RadialMenuHandler : MonoBehaviour
         {
             PerformSingleShift(isClockwise);
 
-            yield return new WaitForSeconds(RotateDuration);
+            yield return new WaitForSeconds(RotateDuration + 0.01f);
         }
+
+        isTransitioning = false;
     }
 
     private void PerformSingleShift(bool isClockwise)
@@ -146,6 +151,9 @@ public class RadialMenuHandler : MonoBehaviour
     #region Callbacks
     private void OnClickedElement(int Index)
     {
+        if (isTransitioning)
+            return;
+
         ReOrderElements(Index);
     }
     #endregion
